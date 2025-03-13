@@ -4,16 +4,16 @@ import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient()
 async function main() {
-    const event = await prisma.event.create({
-        data: {
-            fellepo: faker.person.fullName(),
-            kezdesi_ido: faker.date.recent(),
-            idotartam: faker.date.future(),
-            elmarad: false,
-        }
-    })
-    console.log({ event })
-}
+  const event = Array.from({ length: 5 }).map(() => ({
+              fellepo: faker.person.fullName(),
+              kezdesi_ido: faker.date.recent(),
+              idotartam: faker.number.int({ min: 30, max: 120, multipleOf: 30 }),
+              elmarad: false,
+      }));
+      await prisma.event.createMany({
+        data: event,
+      });
+  }
 
 main()
   .then(async () => {
