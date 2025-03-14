@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCoffeshopEventDto } from './dto/create-coffeshop-event.dto';
-import { UpdateCoffeshopEventDto } from './dto/update-coffeshop-event.dto';
+import { PrismaService } from 'src/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CoffeshopEventService {
-  create(createCoffeshopEventDto: CreateCoffeshopEventDto) {
-    return 'This action adds a new coffeshopEvent';
+  constructor(private prisma: PrismaService) {}
+
+  async createEvent(data: Prisma.EventCreateInput) {
+    return this.prisma.event.create({ data });
   }
 
-  findAll() {
-    return `This action returns all coffeshopEvent`;
+  async getAllEvent() {
+    return this.prisma.event.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} coffeshopEvent`;
+  async getEventById(id: number) {
+    return this.prisma.event.findUnique({
+      where: { id } });
   }
 
-  update(id: number, updateCoffeshopEventDto: UpdateCoffeshopEventDto) {
-    return `This action updates a #${id} coffeshopEvent`;
+  async updateEvent(id: number, data: Prisma.EventUpdateInput) {
+    return this.prisma.event.update({ where: { id }, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} coffeshopEvent`;
+  async deleteEvent(id: number) {
+    return this.prisma.event.delete({ where: { id } });
   }
 }

@@ -4,7 +4,7 @@ export class CreateCoffeshopEventDto {
 
     @IsNotEmpty()
     @IsString()
-    name: string;
+    fellepo: string;
 
     @IsNotEmpty()
     @IsDate()

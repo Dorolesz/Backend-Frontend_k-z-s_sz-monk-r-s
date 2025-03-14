@@ -8,27 +8,27 @@ export class CoffeshopEventController {
   constructor(private readonly coffeshopEventService: CoffeshopEventService) {}
 
   @Post()
-  create(@Body() createCoffeshopEventDto: CreateCoffeshopEventDto) {
-    return this.coffeshopEventService.create(createCoffeshopEventDto);
+  async createEvent(@Body() createCoffeshopEventDto: CreateCoffeshopEventDto) {
+    return this.coffeshopEventService.createEvent(createCoffeshopEventDto);
   }
 
   @Get()
-  findAll() {
-    return this.coffeshopEventService.findAll();
+  async getEvent() {
+    return this.coffeshopEventService.getAllEvent();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.coffeshopEventService.findOne(+id);
+  async getEventById(@Param('id') id: string) {
+    return this.coffeshopEventService.getEventById(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeshopEventDto: UpdateCoffeshopEventDto) {
-    return this.coffeshopEventService.update(+id, updateCoffeshopEventDto);
+  async updateEvent(@Param('id') id: string, @Body() updateCoffeshopEventDto: UpdateCoffeshopEventDto) {
+    return this.coffeshopEventService.updateEvent(+id, updateCoffeshopEventDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.coffeshopEventService.remove(+id);
+  async deleteEvent(@Param('id') id: string) {
+    return this.coffeshopEventService.deleteEvent(+id);
   }
 }
